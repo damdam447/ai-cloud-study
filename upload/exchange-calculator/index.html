@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>환율 계산기</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef2f8;color:#192b43;font-family:system-ui,'Malgun Gothic',sans-serif;font-size:16px}main{max-width:760px;margin:60px auto;padding:0 24px}h1{font-size:32px;letter-spacing:-1px;margin:0 0 12px}p{line-height:1.6}.card{background:white;border:1px solid #dce3ed;border-radius:20px;padding:32px;box-shadow:0 12px 40px #1832510a}.status{color:#526279;font-size:14px;margin-bottom:28px}label{display:block;font-weight:600;margin-bottom:10px}input,select,button{font:inherit;border-radius:9px;border:1px solid #bac7d7;padding:13px;background:white;color:inherit}input[type=number]{width:100%;font-size:26px}select{width:100%}.currencies{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:14px;margin-top:24px}button{cursor:pointer}button:hover{background:#edf3ff}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #7ba5ff;outline-offset:2px}.answer{background:#123d8b;color:white;border-radius:14px;padding:25px;margin:28px 0}.answer p{margin:0 0 6px;color:#cddcfa}.answer output{font-size:clamp(24px,5vw,38px);font-weight:700;overflow-wrap:anywhere;display:block}#unit{font-size:14px;color:#dae5fd;margin-top:12px}table{border-collapse:collapse;width:100%;margin:20px 0}th,td{text-align:left;padding:13px 0;border-bottom:1px solid #e3e8f0}th:last-child,td:last-child{text-align:right}th{font-size:14px;color:#526279}details{margin-top:24px}summary{cursor:pointer;font-size:14px}input[type=file]{max-width:100%;font-size:14px;margin:12px 0}footer{font-size:14px;color:#526279;margin:20px 2px}a{color:#164fa6}@media(max-width:520px){main{margin:24px auto;padding:0 14px}.card{padding:22px}.currencies{gap:8px}select{padding:12px 6px}h1{font-size:28px}}
+</style>
+</head>
+<body><main><h1>환율 계산기</h1><p id="status" class="status" role="status">CSV를 불러오는 중입니다.</p>
+<section class="card" aria-label="통화 변환">
+<label for="amount">변환할 금액</label><input id="amount" type="number" min="0" step="any" value="100" inputmode="decimal">
+<div class="currencies"><div><label for="from">보유 통화</label><select id="from"><option>USD</option><option>KRW</option><option>JPY</option><option>EUR</option></select></div><button id="swap" aria-label="보유 통화와 받을 통화 바꾸기">⇄</button><div><label for="to">받을 통화</label><select id="to"><option>KRW</option><option>USD</option><option>JPY</option><option>EUR</option></select></div></div>
+<div class="answer"><p>환산 금액</p><output id="result" aria-live="polite">—</output><div id="unit"></div></div>
+<table><thead><tr><th scope="col">통화</th><th scope="col">1 USD 기준 환율</th></tr></thead><tbody id="table"></tbody></table>
+<button id="reload">저장된 CSV 다시 읽기</button>
+<details open><summary>CSV 파일 직접 선택</summary><input id="file" type="file" accept=".csv,text/csv" aria-label="환율 CSV 파일 선택"></details>
+</section><footer>출처: <a href="https://api.frankfurter.dev/v1/latest?from=USD&amp;to=KRW,JPY,EUR" target="_blank" rel="noopener">Frankfurter</a>. 저장된 기준일의 환율이며 수수료는 포함하지 않습니다.</footer></main>
+<script src="calculator.js"></script></body></html>
